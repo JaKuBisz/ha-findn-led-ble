@@ -3,8 +3,8 @@
   "name": "Findn LED BLE",
   "bluetooth": [
     {
-      "local_name": "GATT--DEMO",
-      "service_uuid": "0000fff0-0000-1000-8000-00805f9b34fb"
+      "local_name": "JTX-HC",
+      "service_uuid": "8B56F0D4-C604-0920-6442-02B7A6D00772"
     }
   ],
   "codeowners": ["@hirotasoshu"],
