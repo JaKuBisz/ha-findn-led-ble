@@ -16,10 +16,11 @@ from homeassistant.components.bluetooth import (
 from homeassistant.config_entries import ConfigFlow, ConfigFlowResult
 from homeassistant.const import CONF_ADDRESS
 
-from .const import DOMAIN, LOCAL_NAME
+from .const import DOMAIN, WRITE_CHARACTERISTIC_UUID
 from .device import FindnLedDevice
 
 logger: Logger = getLogger(__name__)
+SERVICE_UUID = WRITE_CHARACTERISTIC_UUID.casefold()
 
 
 class FindnLedConfigFlow(ConfigFlow, domain=DOMAIN):
@@ -92,10 +93,14 @@ class FindnLedConfigFlow(ConfigFlow, domain=DOMAIN):
         else:
             current_addresses = self._async_current_ids()
             for discovery in async_discovered_service_info(self.hass):
+                service_uuids = {
+                    service_uuid.casefold()
+                    for service_uuid in (discovery.service_uuids or [])
+                }
                 if (
                     discovery.address in current_addresses
                     or discovery.address in self._discovered_devices
-                    or not discovery.name.startswith(LOCAL_NAME)
+                    or SERVICE_UUID not in service_uuids
                 ):
                     continue
                 self._discovered_devices[discovery.address] = discovery

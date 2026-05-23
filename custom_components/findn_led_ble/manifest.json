@@ -3,7 +3,7 @@
   "name": "Findn LED BLE",
   "bluetooth": [
     {
-      "local_name": "JTX-HC",
+      "local_name": "",
       "service_uuid": "00002022-0000-1000-8000-00805f9b34fb"
     }
   ],
